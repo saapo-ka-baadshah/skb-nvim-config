@@ -7,7 +7,11 @@ Following softwares and platforms are required:
 - linux or mac
 
 ## Usage
-
+Run following command to get the neovim configuration:
+```shell
+bash <(curl -fsSL https://raw.githubusercontent.com/saapo-ka-baadshah/skb-nvim-config/refs/heads/main/setup.sh)
+```
+Press `Y` to continue.
 
 ## How it works?
 This repository is cloned into your NeoVim config directory,
