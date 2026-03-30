@@ -5,8 +5,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	config = function ()
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = require("cmp_nvim_lsp").default_capabilities()
+		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 		local servers = {
 			--- Clang for C / C++
@@ -24,8 +23,6 @@ return {
 			--- TypeScript / JavaScript (Node)
 			ts_ls = {
 				filetypes = {
-					"ts", "tsx",
-					"js", "jsx",
 					"typescript",
 					"javascript",
 					"typescriptreact",
@@ -35,7 +32,7 @@ return {
 
 			--- Python
 			pyright = {
-			  filetypes = { "py", "python" },
+			  filetypes = { "python" },
 			},
 
 			--- Lua
@@ -85,7 +82,7 @@ return {
 
 		--- setup each server from hashmap table
 		for server_name, config in pairs(servers) do
-			require(lspconfig)[server_name].setup({
+			require("lspconfig")[server_name].setup({
 				capabilities	= capabilities,
 				on_attach	= on_attach,
 				filetypes	= config.filetypes,

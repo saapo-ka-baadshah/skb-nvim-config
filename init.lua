@@ -6,7 +6,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 local pluginpath = vim.fn.stdpath("config") .. "/plugins/"
-local configpath = vim.fn.stdpath("config")
 
 -- 	Checks if lazy.nvim is already installed
 if not vim.loop.fs_stat(lazypath) then
