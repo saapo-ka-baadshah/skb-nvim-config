@@ -6,6 +6,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 local pluginpath = vim.fn.stdpath("config") .. "/plugins/"
+local configpath = vim.fn.stdpath("config")
 
 -- 	Checks if lazy.nvim is already installed
 if not vim.loop.fs_stat(lazypath) then
@@ -67,11 +68,6 @@ require ("lazy").setup(
 			"mrjones2014/mdpreview.nvim",
 			ft = "markdown",
 			config = true,
-			--- config = function()
-			--- 		require("mdpreview").setup({
-			--- 			split_direction = "vertical",
-			--- 		})
-			--- 	end,
 			dependencies = {
 				{ "norcalli/nvim-terminal.lua", config = true }
 			},
@@ -86,6 +82,8 @@ require ("lazy").setup(
 			dir = pluginpath .. "default_editor_plugin.nvim",
 			config = true,
 		},   -- for plugins you're developing
+		--	Intellisense
+		{ import = "intellisense" }
 	},
 	{
 		ui = {
