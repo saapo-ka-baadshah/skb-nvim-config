@@ -15,7 +15,7 @@
 
 local specs = {}
 
---- attatches a module to the spec
+--- attaches a module to the spec
 local function add(submodule)
 	local mod_specs = require("intellisense." .. submodule)
 	vim.list_extend(specs, mod_specs)
