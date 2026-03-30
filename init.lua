@@ -7,7 +7,6 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 local pluginpath = vim.fn.stdpath("config") .. "/plugins/"
 local configpath = vim.fn.stdpath("config")
-package.path = package.path .. ";" .. configpath .. "/plugins/?.nvim/lua"
 
 -- 	Checks if lazy.nvim is already installed
 if not vim.loop.fs_stat(lazypath) then
@@ -84,9 +83,7 @@ require ("lazy").setup(
 			config = true,
 		},   -- for plugins you're developing
 		--	Intellisense
-		spec = {
-			dir = pluginpath .. "intellisense.nvim"
-		}
+		{ import = "intellisense" }
 	},
 	{
 		ui = {
