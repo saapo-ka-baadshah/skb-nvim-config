@@ -15,7 +15,9 @@
 
 local specs = {}
 
---- attaches a module to the spec
+-- Adds specs from the named `intellisense` submodule into the module-level `specs` list.
+-- Expects the required module to return a list-like table of specs which are appended to `specs`.
+-- @param submodule The submodule name under `intellisense` to require (e.g. "ui", "cmp", "lsp").
 local function add(submodule)
 	local mod_specs = require("intellisense." .. submodule)
 	vim.list_extend(specs, mod_specs)
