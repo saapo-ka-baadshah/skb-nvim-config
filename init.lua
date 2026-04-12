@@ -7,6 +7,11 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 local pluginpath = vim.fn.stdpath("config") .. "/plugins/"
 
+-- Disable netrw (important)
+vim.g.loaded_netrw		=	1
+vim.g.loaded_netrwPlugin	=	1
+
+
 -- 	Checks if lazy.nvim is already installed
 if not vim.loop.fs_stat(lazypath) then
 	--	if lazy vim is not installed then NeoVim should install the plugin
@@ -82,7 +87,8 @@ require ("lazy").setup(
 			config = true,
 		},   -- for plugins you're developing
 		--	Intellisense
-		{ import = "intellisense" }
+		{ import = "intellisense" },
+		{ import = "nvimtree" },
 	},
 	{
 		ui = {
