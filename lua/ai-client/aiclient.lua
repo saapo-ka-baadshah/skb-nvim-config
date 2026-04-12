@@ -25,6 +25,13 @@ return {
 		config = function()
 			---@type opencode.Opts
 			vim.g.opencode_opts = {
+				events = {
+					permissions = {
+						edits = {
+							enabled = false,
+						},
+					},
+				},
 			}
 
 			-- IMPORTANT: required for automatic buffer reloading after AI edits
