@@ -11,6 +11,10 @@ local pluginpath = vim.fn.stdpath("config") .. "/plugins/"
 vim.g.loaded_netrw		=	1
 vim.g.loaded_netrwPlugin	=	1
 
+--- A global fix for terminal mode
+--- 	By default, NeoVim does not exit the terminal mode on <Esc>.
+--- 	To fix that, keep following line in the config
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = 0 })
 
 -- 	Checks if lazy.nvim is already installed
 if not vim.loop.fs_stat(lazypath) then
@@ -88,8 +92,12 @@ require ("lazy").setup(
 		},   -- for plugins you're developing
 		--	Intellisense
 		{ import = "intellisense" },
+		--	Nvim file explorer as Tree
 		{ import = "nvimtree" },
+		-- 	Splash screen as the welcome page and a standard tool box
 		{ import = "splash" },
+		--	OpenCode as the AI client
+		{ import = "ai-client" },
 	},
 	{
 		ui = {

@@ -20,3 +20,4 @@ Default: `~/.config/nvim`
 This way we can be assured that, we maintain the same NeoVim configurations accross all the machines.
 
 
+

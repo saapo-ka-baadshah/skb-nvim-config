@@ -49,6 +49,7 @@ return {
 			dashboard.section.buttons.val = {
 				dashboard.button("e", "New file", ":ene <BAR> startinsert <CR>"),
 				dashboard.button("\\e", "Toggle file tree view", ":NvimTreeToggle <CR>"),
+				dashboard.button("\\oc", "Toggle AI Client (OpenCode)", "<cmd>OpenCodeToggle<CR>"),
 				dashboard.button("q", "Quit", ":qa<CR>"),
 			}
 
