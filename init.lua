@@ -89,6 +89,7 @@ require ("lazy").setup(
 		--	Intellisense
 		{ import = "intellisense" },
 		{ import = "nvimtree" },
+		{ import = "splash" },
 	},
 	{
 		ui = {
