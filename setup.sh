@@ -6,7 +6,7 @@ echo "Base (AVIM) Installation"
 echo "--------------------------------------------------"
 
 ######################################### Base setup
-# Function for Yes
+# YesConfirm backs up any existing NeoVim config at $NVIM_CONFIG_DIR to $NVIM_CONFIG_DIR.bak, creates the config directory, and clones the SKB NeoVim configuration into it.
 YesConfirm() {
 	echo "Proceeding with NeoVim installation..."
 
@@ -30,7 +30,7 @@ YesConfirm() {
 	echo "NeoVim configured successfully!"
 }
 
-# Function for No
+# NoConfirm cancels the installation, prints a cancellation message, and exits the script with status 0.
 NoConfirm() {
 	echo "Installation cancelled by user."
 	exit 0
@@ -62,7 +62,8 @@ echo "--------------------------------------------------"
 #	Description:
 #		We use SST's OpenCode as the main agent within the AVIM config.
 #-------------------- 
-# Function for installation of AI Client
+# InstallAIClient installs the OpenCode AI client using OS-appropriate methods and verifies that the `opencode` command is available.
+# It detects macOS (uses Homebrew) and Linux (uses the SST online installer on apt-based systems or falls back to `cargo install`), prints guidance for missing prerequisites, and returns exit status 0 on success or non-zero on failure.
 InstallAIClient(){
 	# ==================== Early check if already installed ====================
 	if command -v opencode &> /dev/null; then
