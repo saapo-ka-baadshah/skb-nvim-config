@@ -88,8 +88,12 @@ require ("lazy").setup(
 		},   -- for plugins you're developing
 		--	Intellisense
 		{ import = "intellisense" },
+		--	Nvim file explorer as Tree
 		{ import = "nvimtree" },
+		-- 	Splash screen as the welcome page and a standard tool box
 		{ import = "splash" },
+		--	OpenCode as the AI client
+		{ import = "ai-client" },
 	},
 	{
 		ui = {
