@@ -82,7 +82,8 @@ require ("lazy").setup(
 			config = true,
 		},   -- for plugins you're developing
 		--	Intellisense
-		{ import = "intellisense" }
+		{ import = "intellisense" },
+		{ import = "nvimtree" },
 	},
 	{
 		ui = {
