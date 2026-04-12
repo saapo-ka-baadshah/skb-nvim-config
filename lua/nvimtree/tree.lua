@@ -10,10 +10,6 @@ return {
 			"nvim-tree/nvim-web-devicons",		-- required for nice icons
 		},
 		config = function()
-			-- Disable netrw (important)
-			vim.g.loaded_netrw		=	1
-			vim.g.loaded_netrwPlugin	=	1
-
 			require("nvim-tree").setup({
 				-- General settings
 				sort_by = "case_sensitive",
