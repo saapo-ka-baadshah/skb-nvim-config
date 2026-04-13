@@ -11,6 +11,9 @@ local pluginpath = vim.fn.stdpath("config") .. "/plugins/"
 vim.g.loaded_netrw		=	1
 vim.g.loaded_netrwPlugin	=	1
 
+-- Let the lualine show the mode, do not show the mode otherwise
+vim.opt.showmode		=	false
+
 --- A global fix for terminal mode
 --- 	By default, NeoVim does not exit the terminal mode on <Esc>.
 --- 	To fix that, keep following line in the config
@@ -38,8 +41,6 @@ require ("lazy").setup(
 	{
 		--	Tree sitter and lua baseline edits
 		{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-		{ "nvim-lualine/lualine.nvim" },
-
 		---	0. Floating terminal
 		{
 			"akinsho/toggleterm.nvim",
@@ -98,6 +99,8 @@ require ("lazy").setup(
 		{ import = "splash" },
 		--	OpenCode as the AI client
 		{ import = "ai-client" },
+		--	LuaLine for a more detailed indicator status line
+		{ import = "lualine-wrapper" },
 	},
 	{
 		ui = {
