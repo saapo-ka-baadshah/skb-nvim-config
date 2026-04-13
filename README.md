@@ -105,7 +105,12 @@ The LSP configuration includes support for:
 - Lua (lua_ls)
 - Bash/Shell (bashls)
 
-## Keybindings
+## Changelog
+
+### Bug Fixes
+- **opencode.nvim**: Fixed terminal mode exit - `Esc` key now properly exits terminal mode in opencode windows
+
+### Keybindings
 
 | Keybinding | Action |
 |------------|--------|
