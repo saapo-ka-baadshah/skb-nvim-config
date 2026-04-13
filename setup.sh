@@ -58,12 +58,71 @@ echo "AI Installation"
 echo "--------------------------------------------------"
 
 ######################################### AI Usage
+#----------------------------------------
+#	Description:
+#		We encourage a standard OpenCode configuration for safe default behaviour.
+# ConfigOpenCodeDefault ensures the OpenCode config file exists, displays a proposed JSON configuration, prompts the user to accept it, and appends that configuration to ~/.config/opencode/opencode.json if accepted.
+ConfigOpenCodeDefault(){
+	echo "Writing default configuration..."
+	# Ensure that the opencode.json is present in the opencode configurations.
+	opencode_configpath="$HOME/.config/opencode/opencode.json"
+
+	touch $opencode_configpath
+	cat << 'PROPOSED_CONFIG'
+{
+	"$schema": "https://opencode.ai/config.json",
+	"permission":{
+		"edit": "ask",
+		"bash": {
+			"*": "ask",
+			"git diff*": "allow",
+			"git log*": "allow",
+			"git status": "allow"
+		}
+	}
+}
+PROPOSED_CONFIG
+	
+	echo "..."
+	read -p "Do you want to continue with this proposed configuration? [Y]es / [N]o : " config_choice
+
+	# Handle the choice
+	case "$config_choice" in
+		[yY][eE][sS]|[yY])
+			cat << EOF >> $opencode_configpath
+{
+	"\$schema": "https://opencode.ai/config.json",
+	"permission":{
+		"edit": "ask",
+		"bash": {
+			"*": "ask",
+			"git diff*": "allow",
+			"git log*": "allow",
+			"git status": "allow"
+		}
+	}
+}
+EOF
+		echo "File saved at:	$opencode_configpath"
+		;;
+		[nN][oO]|[nN])
+			echo "Skipping configuration!"
+		;;
+		*)
+			echo "Invalid input. Please enter Y or N."
+		;;
+	esac
+	
+}
+
 #--------------------- 
 #	Description:
 #		We use SST's OpenCode as the main agent within the AVIM config.
 #-------------------- 
 # InstallAIClient installs the OpenCode AI client using OS-appropriate methods and verifies that the `opencode` command is available.
-# It detects macOS (uses Homebrew) and Linux (uses the SST online installer on apt-based systems or falls back to `cargo install`), prints guidance for missing prerequisites, and returns exit status 0 on success or non-zero on failure.
+# It detects macOS (uses Homebrew) and Linux (uses the SST online installer on apt-based systems or falls back to `cargo install`),
+# InstallAIClient installs the OpenCode CLI (opencode), detects the OS, uses an appropriate installer (Homebrew on macOS, SST installer or Cargo on Linux), verifies the installed command is on PATH, and then invokes ConfigOpenCodeDefault.
+# InstallAIClient prints user-facing guidance for missing prerequisites and returns exit status 0 on success or non-zero on failure.
 InstallAIClient(){
 	# ==================== Early check if already installed ====================
 	if command -v opencode &> /dev/null; then
@@ -123,6 +182,8 @@ InstallAIClient(){
 		echo "		If you want to stay in the same instance, then run: 'exec \$SHELL'"
 		return 1
 	fi
+
+	ConfigOpenCodeDefault
 }
 
 echo "Installing the AI Client (OpenCode)..."
@@ -142,4 +203,3 @@ case "$choice" in
     exit 1
     ;;
 esac
-

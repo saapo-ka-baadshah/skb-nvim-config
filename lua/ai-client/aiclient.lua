@@ -29,6 +29,15 @@ return {
 					permissions = {
 						edits = {
 							enabled = false,
+							require_confirmation = true,
+						},
+						write = {
+							enabled = false,
+							require_confirmation = true,
+						},
+						files = {
+							enabled = false,
+							require_confirmation = true,
 						},
 					},
 				},
