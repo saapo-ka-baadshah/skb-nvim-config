@@ -11,6 +11,9 @@ local pluginpath = vim.fn.stdpath("config") .. "/plugins/"
 vim.g.loaded_netrw		=	1
 vim.g.loaded_netrwPlugin	=	1
 
+-- Let the lualine show the mode, do not show the mode otherwise
+vim.opt.showmode		=	false
+
 --- A global fix for terminal mode
 --- 	By default, NeoVim does not exit the terminal mode on <Esc>.
 --- 	To fix that, keep following line in the config
@@ -38,51 +41,10 @@ require ("lazy").setup(
 	{
 		--	Tree sitter and lua baseline edits
 		{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-		{ "nvim-lualine/lualine.nvim" },
-
 		---	0. Floating terminal
-		{
-			"akinsho/toggleterm.nvim",
-			version = "*",
-			keys = {
-				{ "<leader>ft", "<cmd>ToggleTerm<CR>", desc = "Toggle terminal" }
-			},
-			config = function()
-				require("toggleterm").setup({
-				    -- Your existing setup options here...
-				    open_mapping = [[<leader>ft]], -- optional
-				})
-
-				-- Custom function to apply terminal-only keymaps
-				function _G.set_terminal_keymaps()
-				    local opts = {buffer = 0}
-				    -- 1. Map ESC to exit Terminal Mode (use <C-\><C-n>)
-				    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-				    
-				    -- 2. Map Ctrl+hjkl to switch windows DIRECTLY from terminal mode
-				    vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]], opts)
-				    vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]], opts)
-				    vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]], opts)
-				    vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]], opts)
-				end
-
-				-- This autocommand applies the maps every time a terminal opens
-				vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-			    end,
-		},
-		
+		{ import = "floatterminal" },	
 		---	1. Markdown Preview
-		{
-			"mrjones2014/mdpreview.nvim",
-			ft = "markdown",
-			config = true,
-			dependencies = {
-				{ "norcalli/nvim-terminal.lua", config = true }
-			},
-			keys = {
-				{ "<leader>md", "<cmd>Mdpreview<CR>", desc = "Toggle markdown preview" }
-			},
-		},
+		{ import = "markdown-preview" },	
 
 		--	Additional plugins
 		-- { dir = "~/my_plugins/my_cool_plugin" },   -- for plugins you're developing
@@ -98,6 +60,8 @@ require ("lazy").setup(
 		{ import = "splash" },
 		--	OpenCode as the AI client
 		{ import = "ai-client" },
+		--	LuaLine for a more detailed indicator status line
+		{ import = "lualine-wrapper" },
 	},
 	{
 		ui = {
