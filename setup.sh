@@ -88,7 +88,7 @@ PROPOSED_CONFIG
 
 	# Handle the choice
 	case "$config_choice" in
-		[yY][eE][sS][yY])
+		[yY][eE][sS]|[yY])
 			cat << EOF >> opencode_configpath
 {
 	"$schema": "https://opencode.ai/config.json",
@@ -105,7 +105,7 @@ PROPOSED_CONFIG
 EOF
 		echo "File saved at:	$opencode_configpath"
 		;;
-		[nN][oO][nN])
+		[nN][oO]|[nN])
 			echo "Skipping configuration!"
 		;;
 		*)
@@ -182,7 +182,7 @@ InstallAIClient(){
 		return 1
 	fi
 
-	ConfigOpenCodeDefault()
+	ConfigOpenCodeDefault
 }
 
 echo "Installing the AI Client (OpenCode)..."
