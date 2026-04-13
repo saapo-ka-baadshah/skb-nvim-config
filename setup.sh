@@ -61,7 +61,7 @@ echo "--------------------------------------------------"
 #----------------------------------------
 #	Description:
 #		We encourage a standard OpenCode configuration for safe default behaviour.
-#----------------------------------------
+# ConfigOpenCodeDefault ensures the OpenCode config file exists, displays a proposed JSON configuration, prompts the user to accept it, and appends that configuration to ~/.config/opencode/opencode.json if accepted.
 ConfigOpenCodeDefault(){
 	echo "Writing default configuration..."
 	# Ensure that the opencode.json is present in the opencode configurations.
@@ -121,7 +121,8 @@ EOF
 #-------------------- 
 # InstallAIClient installs the OpenCode AI client using OS-appropriate methods and verifies that the `opencode` command is available.
 # It detects macOS (uses Homebrew) and Linux (uses the SST online installer on apt-based systems or falls back to `cargo install`),
-# 	prints guidance for missing prerequisites, and returns exit status 0 on success or non-zero on failure.
+# InstallAIClient installs the OpenCode CLI (opencode), detects the OS, uses an appropriate installer (Homebrew on macOS, SST installer or Cargo on Linux), verifies the installed command is on PATH, and then invokes ConfigOpenCodeDefault.
+# InstallAIClient prints user-facing guidance for missing prerequisites and returns exit status 0 on success or non-zero on failure.
 InstallAIClient(){
 	# ==================== Early check if already installed ====================
 	if command -v opencode &> /dev/null; then
