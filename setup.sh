@@ -89,9 +89,9 @@ PROPOSED_CONFIG
 	# Handle the choice
 	case "$config_choice" in
 		[yY][eE][sS]|[yY])
-			cat << EOF >> opencode_configpath
+			cat << EOF >> $opencode_configpath
 {
-	"$schema": "https://opencode.ai/config.json",
+	"\$schema": "https://opencode.ai/config.json",
 	"permission":{
 		"edit": "ask",
 		"bash": {
