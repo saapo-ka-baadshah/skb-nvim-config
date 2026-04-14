@@ -124,6 +124,8 @@ EOF
 # InstallAIClient installs the OpenCode CLI (opencode), detects the OS, uses an appropriate installer (Homebrew on macOS, SST installer or Cargo on Linux), verifies the installed command is on PATH, and then invokes ConfigOpenCodeDefault.
 # InstallAIClient prints user-facing guidance for missing prerequisites and returns exit status 0 on success or non-zero on failure.
 InstallAIClient(){
+	IS_SUCCESSFUL=false
+
 	# ==================== Early check if already installed ====================
 	if command -v opencode &> /dev/null; then
 		echo "✅ OpenCode is already installed!"
@@ -176,14 +178,19 @@ InstallAIClient(){
 	if command -v opencode &> /dev/null; then
 		echo "✅ Success! OpenCode installed:"
 		opencode --version
+		IS_SUCCESSFUL=true
 	else
 		echo "⚠️  Installation completed, but 'opencode' command not found in PATH."
 		echo "		Try restarting your terminal or running: source ~/.bashrc (or ~/.zshrc)"
 		echo "		If you want to stay in the same instance, then run: 'exec \$SHELL'"
-		return 1
+		IS_SUCCESSFUL=false
 	fi
 
 	ConfigOpenCodeDefault
+
+	if ! $IS_SUCCESSFUL;	then
+		return 1
+	fi
 }
 
 echo "Installing the AI Client (OpenCode)..."
